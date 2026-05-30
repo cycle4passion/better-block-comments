@@ -1,0 +1,95 @@
+{
+	"name": "better-block-comments",
+	"displayName": "Better Block Comments",
+	"description": "Toggle block comments with nested delimiter support via section-sign augmentation.",
+	"version": "1.0.0",
+	"publisher": "scottrhamy",
+	"author": {
+		"name": "Scott Rhamy",
+		"email": "scott@rhamy.com"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cycle4passion/better-block-comments"
+	},
+	"bugs": {
+		"url": "https://github.com/cycle4passion/better-block-comments/issues"
+	},
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Formatters",
+		"Other"
+	],
+	"keywords": [
+		"comment",
+		"comments",
+		"block comment",
+		"toggle",
+		"nested",
+		"universal"
+	],
+	"icon": "images/icon.png",
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "better-block-comments.toggleBlockComment",
+				"title": "Toggle Block Comment",
+				"category": "Better Block Comments"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "better-block-comments.toggleBlockComment",
+				"key": "ctrl+alt+/",
+				"mac": "cmd+alt+/",
+				"when": "editorTextFocus"
+			}
+		],
+		"configuration": {
+			"title": "Better Block Comments",
+			"properties": {
+				"betterBlockComments.universalComment.enabled": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "**Enabled:** No selection → line comment toggled at beginning of line (indent aware).\n\n**Disabled:** No selection → inline block comment `/* */` inserted."
+				},
+				"betterBlockComments.universalComment.inlineEnd": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Cursor at end of line (or in trailing whitespace) → `// ` appended inline at end of code content instead of beginning of line. Toggle invocation removes the trailing comment. Has no effect when **Universal Comment** is disabled."
+				},
+				"betterBlockComments.lineCommentFallback": {
+					"type": "boolean",
+					"default": true,
+					"description": "Languages not supporting Block Comments fallback as Line Comments. Disable to perform no action (VSCode Default)."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src",
+		"test": "node ./out/test/runTest.js",
+		"test:unit": "mocha --ui tdd --require out/test/unit/setup.js 'out/test/unit/**/*.test.js'"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.0",
+		"@types/node": "18.x",
+		"@types/vscode": "^1.85.0",
+		"@typescript-eslint/eslint-plugin": "^6.0.0",
+		"@typescript-eslint/parser": "^6.0.0",
+		"@vscode/test-electron": "^2.3.0",
+		"eslint": "^8.0.0",
+		"glob": "^10.0.0",
+		"mocha": "^10.0.0",
+		"typescript": "^5.0.0"
+	}
+}
