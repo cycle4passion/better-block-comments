@@ -1,7 +1,7 @@
 {
 	"name": "better-block-comments",
 	"displayName": "Better Block Comments",
-	"description": "Toggle block comments with nested delimiter support via section-sign augmentation.",
+	"description": "Supports nested delimiter support, universal comment via single hotkey",
 	"version": "1.0.0",
 	"publisher": "scottrhamy",
 	"author": {
@@ -73,6 +73,8 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
+		"package": "vsce package",
+		"publish": "vsce publish",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",
@@ -81,6 +83,7 @@
 		"test:unit": "mocha --ui tdd --require out/test/unit/setup.js 'out/test/unit/**/*.test.js'"
 	},
 	"devDependencies": {
+		"@secretlint/secretlint-rule-preset-recommend": "^13.0.2",
 		"@types/mocha": "^10.0.0",
 		"@types/node": "18.x",
 		"@types/vscode": "^1.85.0",
@@ -90,6 +93,7 @@
 		"eslint": "^8.0.0",
 		"glob": "^10.0.0",
 		"mocha": "^10.0.0",
+		"secretlint": "^13.0.2",
 		"typescript": "^5.0.0"
 	}
 }

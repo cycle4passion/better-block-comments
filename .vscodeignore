@@ -1,10 +1,12 @@
 .vscode/**
 .vscode-test/**
+.claude/**
+memory/**
+CONTEXT.md
 src/**
 .gitignore
 .eslintrc.cjs
 tsconfig.json
-**/*.map
 **/*.ts
-!out/**
+out/test/**
 node_modules/**
