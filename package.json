@@ -75,6 +75,7 @@
 		"vscode:prepublish": "npm run compile",
 		"package": "vsce package",
 		"publish": "vsce publish",
+		"ovxpublish": "ovsx publish better-block-comments-1.0.0.vsix -p",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",
