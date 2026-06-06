@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.1]
+
+- **Universal Comment for languages without line comments**: in any language or embedded section that has no line comment token (e.g. HTML markup, CSS), a collapsed cursor on a non-empty line now wraps the full line content with the language's block comment tokens (`<!-- content -->`, `/* content */`, etc.) instead of inserting an empty comment. Re-triggering on an already-commented line removes the tokens. Empty lines still insert an empty block comment as before.
+
 ## [1.0.0]
 
 - `better-block-comments.toggleBlockComment` command (`cmd+alt+/` / `ctrl+alt+/`)

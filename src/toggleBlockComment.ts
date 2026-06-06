@@ -186,8 +186,36 @@ export async function toggleBlockComment(editor: vscode.TextEditor) {
 								editBuilder.insert(new vscode.Position(lineNo, indentLen), tokenWithSpace);
 							}
 						}
+					} else if (universalCommentEnabled) {
+						// No line comment token (HTML, CSS) — wrap whole line with block comment tokens
+						const lineNo = selection.active.line;
+						const lineText = editor.document.lineAt(lineNo).text;
+						const indentLen = lineText.length - lineText.trimStart().length;
+						const lineContent = lineText.slice(indentLen).trimEnd();
+
+						if (lineContent.length > 0) {
+							const { open, close } = tokens;
+							if (lineContent.startsWith(open) && lineContent.endsWith(close)) {
+								// Toggle off: restore inner content
+								const inner = lineContent.slice(open.length, lineContent.length - close.length).trim();
+								editBuilder.replace(
+									new vscode.Range(lineNo, indentLen, lineNo, indentLen + lineContent.length),
+									inner,
+								);
+							} else {
+								// Toggle on: wrap line content with block comment
+								editBuilder.replace(
+									new vscode.Range(lineNo, indentLen, lineNo, indentLen + lineContent.length),
+									`${open} ${lineContent} ${close}`,
+								);
+							}
+						} else {
+							// Empty line — insert empty block comment
+							insertEmptyBlockComment(editBuilder, ctx);
+							insertedAt.push(selection.active);
+						}
 					} else {
-						// Insert or remove empty block comment
+						// universalComment disabled — insert or remove empty block comment
 						const line = editor.document.lineAt(selection.active.line).text;
 						const isInsideExisting =
 							line.lastIndexOf(tokens.open, selection.active.character) !== -1 &&

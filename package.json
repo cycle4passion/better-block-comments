@@ -2,7 +2,7 @@
 	"name": "better-block-comments",
 	"displayName": "Better Block Comments",
 	"description": "Supports nested delimiter support, universal comment via single hotkey",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "scottrhamy",
 	"author": {
 		"name": "Scott Rhamy",
